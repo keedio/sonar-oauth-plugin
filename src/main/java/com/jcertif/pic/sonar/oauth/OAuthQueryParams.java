@@ -35,6 +35,7 @@ public class OAuthQueryParams {
     public static final String RESPONSE_TYPE = "response_type";
     public static final String STATE = "state";
     public static final String GRANT_TYPE = "grant_type";
+    public static final String HOSTED_DOMAIN = "hd";
     public static final String AUTHORIZATION_CODE = "authorization_code";
     public static final String ACCESS_TOKEN = "access_token";
     public static final String ERROR = "error";
@@ -55,6 +56,7 @@ public class OAuthQueryParams {
         private String responseType;
         private String code;
         private String grantType;
+        private String hostedDomain;
 
         public Builder() {
             this("");
@@ -104,6 +106,11 @@ public class OAuthQueryParams {
             return this;
         }
 
+        public Builder withHostedDomain(String hostedDomain) {
+            this.hostedDomain = hostedDomain;
+            return this;
+        }
+
         public String build() {
             String result = baseParams;
             StringBuilder queryString = new StringBuilder();
@@ -115,6 +122,7 @@ public class OAuthQueryParams {
             addIfExists(queryString, RESPONSE_TYPE, responseType);
             addIfExists(queryString, CODE, code);
             addIfExists(queryString, GRANT_TYPE, grantType);
+            addIfExists(queryString, HOSTED_DOMAIN, hostedDomain);
 
             if (!Strings.isNullOrEmpty(queryString.toString())) {
                 result += queryString.toString();

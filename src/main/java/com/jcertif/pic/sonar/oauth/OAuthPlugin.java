@@ -35,6 +35,7 @@ import org.sonar.api.Property;
 import org.sonar.api.ServerExtension;
 import org.sonar.api.SonarPlugin;
 import org.sonar.plugins.oauth.api.OAuthClient;
+import org.sonar.plugins.oauth.providers.GoogleClient;
 
 /**
  *
@@ -51,6 +52,7 @@ public class OAuthPlugin extends SonarPlugin {
 
     @Override
     public List getExtensions() {
+        LOGGER.info("Getting extensions");
         return ImmutableList.of(OAuthExtensions.class);
     }
 
@@ -67,6 +69,7 @@ public class OAuthPlugin extends SonarPlugin {
 
         @Override
         public Object provide() {
+            LOGGER.info("Providing extensions");
             List<Class> extensions = Lists.newArrayList();
             if (isRealmEnabled()) {
                 Preconditions.checkState(settings.getBoolean(CoreProperties.CORE_AUTHENTICATOR_CREATE_USERS), "Property sonar.authenticator.createUsers must be set to true.");
@@ -82,8 +85,9 @@ public class OAuthPlugin extends SonarPlugin {
         }
 
         private boolean isRealmEnabled() {
-            return OAuthSecurityRealm.NAME.equalsIgnoreCase(settings.getString(CoreProperties.CORE_AUTHENTICATOR_REALM));
-
+            boolean res = OAuthSecurityRealm.NAME.equalsIgnoreCase(settings.getString(CoreProperties.CORE_AUTHENTICATOR_REALM));
+            LOGGER.info("Is Realm enabled: " + res);
+            return res;
         }
 
         private Class<? extends OAuthClient> getOAuthClient() {
@@ -108,4 +112,5 @@ public class OAuthPlugin extends SonarPlugin {
         public static final String SONAR_SERVER_URL = "sonar.oauth.sonarServerUrl";
         public static final String ADMIN_USERS = "sonar.oauth.adminUsers";
     }
+
 }

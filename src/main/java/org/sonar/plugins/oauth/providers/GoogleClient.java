@@ -66,6 +66,7 @@ public class GoogleClient extends OAuthClient {
         String authorizationUrl = settings.getString(Settings.AUTHORIZATION_URL);
         String clientId = settings.getString(Settings.CLIENT_ID);
         String scope = settings.getString(Settings.SCOPE);
+        String hostedDomain = settings.getString(Settings.HOSTED_DOMAIN);
         Preconditions.checkArgument(StringUtils.isNotBlank(authorizationUrl), "Property is missing : " + Settings.AUTHORIZATION_URL);
         Preconditions.checkArgument(!authorizationUrl.contains("?"), "Property must not contain the character ? : " + Settings.AUTHORIZATION_URL);
         Preconditions.checkArgument(!StringUtils.endsWith(authorizationUrl, "/"), "Property must not end with with slash / : " + Settings.AUTHORIZATION_URL);
@@ -77,6 +78,7 @@ public class GoogleClient extends OAuthClient {
                 .withResponseType("code")
                 .withRedirectUri(getSonarServerUrl() + "/oauth/validate")
                 .withScope(scope)
+                .withHostedDomain(hostedDomain)
                 .build());
     }
 
@@ -117,6 +119,7 @@ public class GoogleClient extends OAuthClient {
         public static final String ACCESS_TOKEN_METHOD = "sonar.google.accessTokenMethod";
         public static final String AUTHORIZATION_URL_PARAMS = "sonar.google.authorizationUrlParams";
         public static final String ACCESS_TOKEN_URL_PARAMS = "sonar.google.accessTokenUrlParams";
+        public static final String HOSTED_DOMAIN = "sonar.google.hostedDomain";
         public static final String CLIENT_ID = "sonar.google.clientId.secured";
         public static final String CLIENT_SECRET = "sonar.google.clientSecret.secured";
         public static final String SCOPE = "sonar.google.scope";
