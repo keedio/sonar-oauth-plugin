@@ -4,7 +4,7 @@
 
     <groupId>com.jcertif.pic.plugins</groupId>
     <artifactId>sonar-oauth-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>Sonar OAuth Plugin</name>
     <packaging>sonar-plugin</packaging>
     <url>http://jcertiflab.github.io/sonar-oauth-plugin</url>
@@ -27,23 +27,6 @@
         <developerConnection>scm:git:git@github.com:JCERTIFLab/sonar-oauth-plugin.git</developerConnection>
         <url>https://JCERTIFLab@github.com/JCERTIFLab/sonar-oauth-plugin.git</url>
     </scm>
-    
-    <distributionManagement>
-        <repository>
-            <id>jcertif-releases</id>
-            <url>http://ns395624.ip-176-31-120.eu:8080/nexus/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>jcertif-snapshots</id>
-            <url>http://ns395624.ip-176-31-120.eu:8080/nexus/content/repositories/snapshots</url>
-            <uniqueVersion>false</uniqueVersion>
-        </snapshotRepository>
-    </distributionManagement>
-    
-    <issueManagement>
-        <system>Github Issue Tracker</system>
-        <url>https://github.com/JCERTIFLab/sonar-oauth-plugin/issues</url>
-    </issueManagement>
     
     <licenses>
         <license>
@@ -81,7 +64,7 @@
         <dependency>
             <groupId>org.codehaus.sonar</groupId>
             <artifactId>sonar-plugin-api</artifactId>
-            <version>4.1.2</version>
+            <version>5.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -129,6 +112,15 @@
                     <pluginName>OAuth</pluginName>
                     <pluginClass>com.jcertif.pic.sonar.oauth.OAuthPlugin</pluginClass>
                     <pluginDescription>${project.description}</pluginDescription>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
         </plugins>
